@@ -18,6 +18,11 @@ public class QuestionController {
 	@Autowired
 	private QuestionRepository qnaRepository;
 	
+	@GetMapping("/questionForm")
+	public String form(){
+		return "qna/form";
+	}
+	
 	@PostMapping("/questions")
 	public String qnaCreate(Question qna){
 		SimpleDateFormat sdf = new SimpleDateFormat("yy-MM-dd hh:mm");
