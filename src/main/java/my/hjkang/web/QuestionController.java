@@ -25,7 +25,6 @@ public class QuestionController {
 		
 		qna.setRegDate(sdf.format(date));
 		qnaRepository.save(qna);
-		
 		return "redirect:/";
 	}
 	

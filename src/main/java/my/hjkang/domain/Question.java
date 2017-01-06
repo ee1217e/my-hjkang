@@ -45,7 +45,7 @@ public class Question {
 
 	@Override
 	public String toString() {
-		return "Qna [id=" + id + ", writer=" + writer + ", title=" + title + ", contents=" + contents + ", reg_date="
+		return "Qna [id=" + id + ", writer=" + writer + ", title=" + title + ", contents=" + contents + ", reg_date= "
 				+ reg_date + "]";
 	}
 
