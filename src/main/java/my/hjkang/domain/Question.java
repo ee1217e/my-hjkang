@@ -7,7 +7,7 @@ import javax.persistence.Id;
 
 @Entity
 public class Question {
-
+	
 	@Id
 	@GeneratedValue // AI
 	private long id;
@@ -21,6 +21,7 @@ public class Question {
 	@Column(nullable = false)
 	private String contents;
 
+	@Column(nullable = false)
 	private String reg_date;
 
 	public void setId(long id) {
