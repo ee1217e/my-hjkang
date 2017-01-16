@@ -1,5 +1,7 @@
 package my.hjkang.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -22,6 +24,10 @@ public class QuestionService {
 		return questionRepository.findAll();
 	}
 
+	public List<Question> findByDeleteStatus() {
+		return questionRepository.findByDeleteStatus(0);
+	}
+	
 	public void create(Question question) {
 		questionRepository.save(question);
 	}

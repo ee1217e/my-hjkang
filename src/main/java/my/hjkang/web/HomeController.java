@@ -7,21 +7,21 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
-import my.hjkang.domain.QuestionRepository;
 import my.hjkang.domain.User;
+import my.hjkang.service.QuestionService;
 
 @Controller
 public class HomeController {
 	
 	@Autowired
-	private QuestionRepository questionRepository;
+	private QuestionService questionService;
 	
 	@GetMapping("/")
 	public String home(HttpSession session, Model model){
 		User sessionUser = (User) session.getAttribute("sessionUser");
 		
 		model.addAttribute("sessionedUser", sessionUser);
-		model.addAttribute("questions", questionRepository.findAll());
+		model.addAttribute("questions", questionService.findByDeleteStatus());
 		return "index";
 	}
 }

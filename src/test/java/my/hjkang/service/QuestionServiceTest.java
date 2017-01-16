@@ -69,7 +69,7 @@ public class QuestionServiceTest {
 		User sessionUser = new User(1L, "hjkang", "abc", "강현지", "hjkang@rockplace.co.kr");
 
 		question.delete(sessionUser);
-		assertEquals(question.getDeleteStatus(), "deleted");
+		assertEquals(question.getDeleteStatus(), 1);
 	}
 
 	@Test

@@ -39,7 +39,7 @@ public class Question {
 	private String regDate;
 
 	@Column
-	private String deleteStatus;
+	private int deleteStatus;
 
 	public Question() {
 	}
@@ -71,7 +71,7 @@ public class Question {
 	}
 
 	private void deleteStatusUpdate() {
-		this.deleteStatus = "deleted";
+		this.deleteStatus = 1;
 	}
 
 	private void qnaAndAnswerWriterCheck(Answer answer) throws Exception {
@@ -104,7 +104,7 @@ public class Question {
 		this.writer = writer;
 	}
 	
-	public String getDeleteStatus() {
+	public int getDeleteStatus() {
 		return deleteStatus;
 	}
 	
