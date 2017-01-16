@@ -15,7 +15,7 @@ import my.hjkang.domain.Question;
 import my.hjkang.domain.User;
 
 @RunWith(MockitoJUnitRunner.class)
-public class QuestionTest {
+public class QuestionServiceTest {
 
 	@Test
 	public void 사용자동일() throws Exception {
@@ -39,29 +39,27 @@ public class QuestionTest {
 	@Test
 	public void 질문자답변자같으면삭제가능() throws Exception {
 		User writer = new User(1L, "hjkang", "abc", "강현지", "hjkang@rockplace.co.kr");
-		Question question = new Question(1L, writer, null, "제목", "내용", "2017-01-11", null);
-
+		
 		List<Answer> answerList = new ArrayList<Answer>();
+		answerList.add(new Answer(1L, writer, "댓글1"));
+		answerList.add(new Answer(2L, writer, "댓글2"));
+		
+		Question question = new Question(1L, writer, answerList, "제목", "내용", "2017-01-11", null);
 
-		answerList.add(new Answer(1L, question, writer, "댓글1"));
-		answerList.add(new Answer(2L, question, writer, "댓글2"));
-
-		question.setAnswers(answerList);
 		question.delete(writer);
 	}
 
 	@Test
 	public void 질문자답변자다르면삭제불가능() throws Exception {
 		User writer = new User(1L, "hjkang", "abc", "강현지", "hjkang@rockplace.co.kr");
-		Question question = new Question(1L, writer, null, "제목", "내용", "2017-01-11", null);
 		User sessionUser = new User(2L, "qhrja", "abc", "박보검", "qhrja@rockplace.co.kr");
 
 		List<Answer> answerList = new ArrayList<Answer>();
+		answerList.add(new Answer(1L, writer, "댓글1"));
+		answerList.add(new Answer(2L, sessionUser, "댓글2"));
+		
+		Question question = new Question(1L, writer, answerList, "제목", "내용", "2017-01-11", null);
 
-		answerList.add(new Answer(1L, question, writer, "댓글1"));
-		answerList.add(new Answer(2L, question, sessionUser, "댓글2"));
-
-		question.setAnswers(answerList);
 		question.delete(writer);
 	}
 

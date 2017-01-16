@@ -28,10 +28,9 @@ public class Answer {
 	public Answer() {
 	}
 
-	public Answer(long id, Question question, User writer, String contents) {
+	public Answer(long id, User writer, String contents) {
 		super();
 		this.id = id;
-		this.question = question;
 		this.writer = writer;
 		this.contents = contents;
 	}
