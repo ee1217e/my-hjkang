@@ -25,38 +25,38 @@ public class DeleteStatus {
 	@JoinColumn(foreignKey = @ForeignKey(name = "fk_user_to_answer"))
 	private User writer;
 
-	private String deleteTime;
+	private String regDate;
 
 	public DeleteStatus() {
 	}
 
-	public DeleteStatus(long id, Question question, User writer, String deleteTime) {
+	public DeleteStatus(long id, Question question, User writer, String regDate) {
 		super();
 		this.id = id;
 		this.question = question;
 		this.writer = writer;
-		this.deleteTime = deleteTime;
+		this.regDate = regDate;
 	}
 
 	public Question getQuestion() {
 		return question;
 	}
 	
-	public String deleteTime() {
+	public void setRegDate() {
 		SimpleDateFormat sdf = new SimpleDateFormat("yy-MM-dd hh:mm");
 		Date date = new Date();
-		return sdf.format(date);
+		this.regDate = sdf.format(date);
 	}
-
+	
 	public void create(Question question, User user) {
 		this.question = question;
 		this.writer = user;
-		this.deleteTime = deleteTime();
+		setRegDate();
 	}
 
 	@Override
 	public String toString() {
-		return "DeleteStatus [id=" + id + ", question=" + question + ", writer=" + writer + ", deleteTime=" + deleteTime
+		return "DeleteStatus [id=" + id + ", question=" + question + ", writer=" + writer + ", regDate=" + regDate
 				+ "]";
 	}
 

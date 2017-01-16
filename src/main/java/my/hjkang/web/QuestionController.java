@@ -44,7 +44,7 @@ public class QuestionController {
 			return "redirect:/users/login";
 		}
 
-		question.setRegDate(question.nowTime());
+		question.setRegDate();
 		questionService.create(question);
 
 		return "redirect:/";

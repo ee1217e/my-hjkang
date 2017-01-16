@@ -44,16 +44,13 @@ public class Question {
 	public Question() {
 	}
 
-	public Question(long id, User writer, List<Answer> answers, String title, String contents, String regDate,
-			String deleteStatus) {
+	public Question(long id, User writer, List<Answer> answers, String title, String contents) {
 		super();
 		this.id = id;
 		this.writer = writer;
 		this.answers = answers;
 		this.title = title;
 		this.contents = contents;
-		this.regDate = regDate;
-		this.deleteStatus = deleteStatus;
 	}
 
 	public boolean delete(User user) throws Exception {
@@ -97,8 +94,10 @@ public class Question {
 		this.contents = contents;
 	}
 
-	public void setRegDate(String regDate) {
-		this.regDate = regDate;
+	public void setRegDate() {
+		SimpleDateFormat sdf = new SimpleDateFormat("yy-MM-dd hh:mm");
+		Date date = new Date();
+		this.regDate = sdf.format(date);
 	}
 
 	public void setWriter(User writer) {
@@ -109,12 +108,6 @@ public class Question {
 		return deleteStatus;
 	}
 	
-	public String nowTime() {
-		SimpleDateFormat sdf = new SimpleDateFormat("yy-MM-dd hh:mm");
-		Date date = new Date();
-		return sdf.format(date);
-	}
-
 	@Override
 	public String toString() {
 		return "Question [id=" + id + ", writer=" + writer + ", answers=" + answers + ", title=" + title + ", contents="

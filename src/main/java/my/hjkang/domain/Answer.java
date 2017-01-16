@@ -72,14 +72,10 @@ public class Answer {
 		this.contents = contents;
 	}
 
-	public void setRegDate(String regDate) {
-		this.regDate = regDate;
-	}
-
-	public String nowTime() {
+	public void setRegDate() {
 		SimpleDateFormat sdf = new SimpleDateFormat("yy-MM-dd hh:mm");
 		Date date = new Date();
-		return sdf.format(date);
+		this.regDate = sdf.format(date);
 	}
 
 	@Override

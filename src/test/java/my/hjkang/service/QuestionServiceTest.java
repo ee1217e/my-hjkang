@@ -29,7 +29,7 @@ public class QuestionServiceTest {
 	@Test
 	public void 댓글없을때삭제가능() throws Exception {
 		User writer = new User(1L, "hjkang", "abc", "강현지", "hjkang@rockplace.co.kr");
-		Question question = new Question(1L, writer, null, "제목", "내용", "2017-01-11", null);
+		Question question = new Question(1L, writer, null, "제목", "내용");
 
 		boolean result = question.delete(writer);
 		assertTrue(result);
@@ -43,7 +43,7 @@ public class QuestionServiceTest {
 		answerList.add(new Answer(1L, writer, "댓글1"));
 		answerList.add(new Answer(2L, writer, "댓글2"));
 		
-		Question question = new Question(1L, writer, answerList, "제목", "내용", "2017-01-11", null);
+		Question question = new Question(1L, writer, answerList, "제목", "내용");
 
 		question.delete(writer);
 	}
@@ -57,7 +57,7 @@ public class QuestionServiceTest {
 		answerList.add(new Answer(1L, writer, "댓글1"));
 		answerList.add(new Answer(2L, sessionUser, "댓글2"));
 		
-		Question question = new Question(1L, writer, answerList, "제목", "내용", "2017-01-11", null);
+		Question question = new Question(1L, writer, answerList, "제목", "내용");
 
 		question.delete(writer);
 	}
@@ -65,7 +65,7 @@ public class QuestionServiceTest {
 	@Test
 	public void 질문삭제상태변경() throws Exception {
 		User writer = new User(1L, "hjkang", "abc", "강현지", "hjkang@rockplace.co.kr");
-		Question question = new Question(1L, writer, null, "제목", "내용", "2017-01-11", null);
+		Question question = new Question(1L, writer, null, "제목", "내용");
 		User sessionUser = new User(1L, "hjkang", "abc", "강현지", "hjkang@rockplace.co.kr");
 
 		question.delete(sessionUser);
@@ -75,7 +75,7 @@ public class QuestionServiceTest {
 	@Test
 	public void 질문삭제시로그추가() throws Exception {
 		User writer = new User(1L, "hjkang", "abc", "강현지", "hjkang@rockplace.co.kr");
-		Question question = new Question(1L, writer, null, "제목", "내용", "2017-01-11", null);
+		Question question = new Question(1L, writer, null, "제목", "내용");
 		
 		DeleteStatus deleteStatus = new DeleteStatus(1L, question, writer, "17-01-12 05:03");
 		assertEquals(deleteStatus.getQuestion(), question);
