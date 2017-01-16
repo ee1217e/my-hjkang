@@ -55,36 +55,40 @@ public class Question {
 	}
 
 	public boolean delete(User user) throws Exception {
-		loginUserWriterCheck(user);
-		
+		user.loginUserWriterCheck(user);
+
 		if (answers == null) {
 			deleteStatusUpdate();
 			return true;
 		}
-		
+
 		for (Answer answer : answers) {
 			qnaAndAnswerWriterCheck(answer);
 		}
-		
+
 		deleteStatusUpdate();
-		
+
 		return true;
 	}
 
 	private void deleteStatusUpdate() {
 		this.deleteStatus = "deleted";
 	}
-	
+
 	private void qnaAndAnswerWriterCheck(Answer answer) throws Exception {
 		if (answer.getWriter() != this.writer) {
 			throw new Exception("질문자와 답변자가 다른 경우 삭제할 수 없습니다.");
 		}
 	}
 
-	private void loginUserWriterCheck(User user) throws Exception {
+	/*private void loginUserWriterCheck(User user) throws Exception {
 		if (this.writer.getId() != user.getId()) {
 			throw new Exception("자신이 등록한 글만 삭제할 수 있습니다.");
 		}
+	}*/
+
+	public long getId() {
+		return id;
 	}
 
 	public void setId(long id) {
@@ -118,7 +122,7 @@ public class Question {
 	public void setAnswers(List<Answer> answers) {
 		this.answers = answers;
 	}
-	
+
 	public String getDeleteStatus() {
 		return deleteStatus;
 	}
