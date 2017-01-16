@@ -1,5 +1,7 @@
 package my.hjkang.domain;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -34,7 +36,7 @@ public class Question {
 	private String contents;
 
 	@Column(nullable = false)
-	private String reg_date;
+	private String regDate;
 
 	@Column
 	private String deleteStatus;
@@ -42,7 +44,7 @@ public class Question {
 	public Question() {
 	}
 
-	public Question(long id, User writer, List<Answer> answers, String title, String contents, String reg_date,
+	public Question(long id, User writer, List<Answer> answers, String title, String contents, String regDate,
 			String deleteStatus) {
 		super();
 		this.id = id;
@@ -50,12 +52,12 @@ public class Question {
 		this.answers = answers;
 		this.title = title;
 		this.contents = contents;
-		this.reg_date = reg_date;
+		this.regDate = regDate;
 		this.deleteStatus = deleteStatus;
 	}
 
 	public boolean delete(User user) throws Exception {
-		user.loginUserWriterCheck(user);
+		loginUserWriterCheck(user);
 
 		if (answers == null) {
 			deleteStatusUpdate();
@@ -81,18 +83,10 @@ public class Question {
 		}
 	}
 
-	/*private void loginUserWriterCheck(User user) throws Exception {
+	private void loginUserWriterCheck(User user) throws Exception {
 		if (this.writer.getId() != user.getId()) {
 			throw new Exception("자신이 등록한 글만 삭제할 수 있습니다.");
 		}
-	}*/
-
-	public long getId() {
-		return id;
-	}
-
-	public void setId(long id) {
-		this.id = id;
 	}
 
 	public void setTitle(String title) {
@@ -103,34 +97,28 @@ public class Question {
 		this.contents = contents;
 	}
 
-	public void setRegDate(String reg_date) {
-		this.reg_date = reg_date;
-	}
-
-	public User getWriter() {
-		return writer;
+	public void setRegDate(String regDate) {
+		this.regDate = regDate;
 	}
 
 	public void setWriter(User writer) {
 		this.writer = writer;
 	}
-
-	public List<Answer> getAnswers() {
-		return answers;
-	}
-
-	public void setAnswers(List<Answer> answers) {
-		this.answers = answers;
-	}
-
+	
 	public String getDeleteStatus() {
 		return deleteStatus;
+	}
+	
+	public String nowTime() {
+		SimpleDateFormat sdf = new SimpleDateFormat("yy-MM-dd hh:mm");
+		Date date = new Date();
+		return sdf.format(date);
 	}
 
 	@Override
 	public String toString() {
 		return "Question [id=" + id + ", writer=" + writer + ", answers=" + answers + ", title=" + title + ", contents="
-				+ contents + ", reg_date=" + reg_date + ", deleteStatus=" + deleteStatus + "]";
+				+ contents + ", regDate=" + regDate + ", deleteStatus=" + deleteStatus + "]";
 	}
 
 }

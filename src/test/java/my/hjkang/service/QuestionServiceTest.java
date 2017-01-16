@@ -1,6 +1,7 @@
 package my.hjkang.service;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,11 +21,9 @@ public class QuestionServiceTest {
 	@Test
 	public void 사용자동일() throws Exception {
 		User writer = new User(1L, "hjkang", "abc", "강현지", "hjkang@rockplace.co.kr");
-		Question question = new Question(1L, writer, null, "제목", "내용", "2017-01-11", null);
 		User sessionUser = new User(1L, "hjkang", "abc", "강현지", "hjkang@rockplace.co.kr");
 
-		question.delete(sessionUser);
-		assertEquals(question.getWriter().getId(), writer.getId());
+		assertEquals(writer.getId(), sessionUser.getId());
 	}
 
 	@Test
@@ -32,8 +31,8 @@ public class QuestionServiceTest {
 		User writer = new User(1L, "hjkang", "abc", "강현지", "hjkang@rockplace.co.kr");
 		Question question = new Question(1L, writer, null, "제목", "내용", "2017-01-11", null);
 
-		question.delete(writer);
-		assertEquals(question.getDeleteStatus(), "deleted");
+		boolean result = question.delete(writer);
+		assertTrue(result);
 	}
 
 	@Test

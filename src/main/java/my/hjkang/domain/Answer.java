@@ -1,5 +1,8 @@
 package my.hjkang.domain;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.ForeignKey;
@@ -24,6 +27,8 @@ public class Answer {
 
 	@Column(nullable = false)
 	private String contents;
+
+	private String regDate;
 
 	public Answer() {
 	}
@@ -67,9 +72,20 @@ public class Answer {
 		this.contents = contents;
 	}
 
+	public void setRegDate(String regDate) {
+		this.regDate = regDate;
+	}
+
+	public String nowTime() {
+		SimpleDateFormat sdf = new SimpleDateFormat("yy-MM-dd hh:mm");
+		Date date = new Date();
+		return sdf.format(date);
+	}
+
 	@Override
 	public String toString() {
-		return "Answer [id=" + id + ", question=" + question + ", writer=" + writer + ", contents=" + contents + "]";
+		return "Answer [id=" + id + ", question=" + question + ", writer=" + writer + ", contents=" + contents
+				+ ", regDate=" + regDate + "]";
 	}
 
 }

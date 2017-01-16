@@ -33,12 +33,6 @@ public class User {
 		this.name = name;
 		this.email = email;
 	}
-	
-	void loginUserWriterCheck(User user) throws Exception {
-		if (this.id != user.id) {
-			throw new Exception("자신의 글이 아닙니다.");
-		}
-	}
 
 	public long getId() {
 		return id;

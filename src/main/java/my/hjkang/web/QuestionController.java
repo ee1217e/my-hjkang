@@ -1,8 +1,5 @@
 package my.hjkang.web;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,10 +44,7 @@ public class QuestionController {
 			return "redirect:/users/login";
 		}
 
-		SimpleDateFormat sdf = new SimpleDateFormat("yy-MM-dd hh:mm");
-		Date date = new Date();
-
-		question.setRegDate(sdf.format(date));
+		question.setRegDate(question.nowTime());
 		questionService.create(question);
 
 		return "redirect:/";

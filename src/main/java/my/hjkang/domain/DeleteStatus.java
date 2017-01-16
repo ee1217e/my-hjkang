@@ -38,34 +38,10 @@ public class DeleteStatus {
 		this.deleteTime = deleteTime;
 	}
 
-	public long getId() {
-		return id;
-	}
-
-	public void setId(long id) {
-		this.id = id;
-	}
-
 	public Question getQuestion() {
 		return question;
 	}
-
-	public void setQuestion(Question question) {
-		this.question = question;
-	}
-
-	public User getWriter() {
-		return writer;
-	}
-
-	public void setWriter(User writer) {
-		this.writer = writer;
-	}
-
-	public String getDeleteTime() {
-		return deleteTime;
-	}
-
+	
 	public String deleteTime() {
 		SimpleDateFormat sdf = new SimpleDateFormat("yy-MM-dd hh:mm");
 		Date date = new Date();

@@ -35,6 +35,7 @@ public class AnswerController {
 		Question question = questionService.findById(questionId);
 		answer.setWriter(sessionUser);
 		answer.setQuestion(question);
+		answer.setRegDate(answer.nowTime());
 		
 		answerService.create(answer);
 
