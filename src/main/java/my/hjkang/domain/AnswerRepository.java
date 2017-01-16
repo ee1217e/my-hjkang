@@ -1,7 +1,7 @@
 package my.hjkang.domain;
 
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface AnswerRepository extends CrudRepository<Answer, Long>{
-	
+public interface AnswerRepository extends JpaRepository<Answer, Long>{
+	void delete(long questionId);
 }

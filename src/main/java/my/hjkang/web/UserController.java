@@ -11,14 +11,14 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import my.hjkang.domain.User;
-import my.hjkang.domain.UserRepository;
+import my.hjkang.service.UserService;
 
 @Controller
 @RequestMapping("/users")
 public class UserController {
 	
 	@Autowired
-	private UserRepository userRepository;
+	private UserService userService;
 	
 	@GetMapping("/form")
 	public String form(){
@@ -32,8 +32,8 @@ public class UserController {
 	
 	@PostMapping("/loginOk")
 	public String login(String userId, User sessionUser, HttpSession session){
+		User user = userService.findByUserId(userId);
 		
-		User user = userRepository.findByUserId(userId);
 		if(user == null){
 			return "redirect:/users/login";
 		}
@@ -54,13 +54,13 @@ public class UserController {
 
 	@PostMapping("")
 	public String create(User user){
-		userRepository.save(user);
+		userService.create(user);
 		return "redirect:/users";
 	}
 	
 	@GetMapping("")
 	public String list(Model model, HttpSession session){
-		model.addAttribute("users", userRepository.findAll());
+		model.addAttribute("users", userService.findAll());
 		
 		/*User user = (User) session.getAttribute("user");
 		model.addAttribute("sessionedUser", user);*/
@@ -77,8 +77,8 @@ public class UserController {
 			throw new IllegalStateException("자신의 정보만 수정할 수 있습니다.");
 		}
 		
-		User user = userRepository.findOne(id);
-		/*User user = userRepository.findOne(sessionUser.getId());*/
+		User user = userService.findById(id);
+		
 		model.addAttribute("user", user);
 		return "/user/updateForm";
 	}
@@ -93,9 +93,9 @@ public class UserController {
 			throw new IllegalStateException("자신의 정보만 수정할 수 있습니다.");
 		}
 		
-		User user = userRepository.findOne(id);
+		User user = userService.findById(id);
 		user.update(updateUser);
-		userRepository.save(user);
+		userService.create(user);
 		
 		return "redirect:/users";
 	}

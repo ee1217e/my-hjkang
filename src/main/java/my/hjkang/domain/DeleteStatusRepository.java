@@ -2,5 +2,5 @@ package my.hjkang.domain;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface QuestionRepository extends JpaRepository<Question, Long>{
+public interface DeleteStatusRepository extends JpaRepository<DeleteStatus, Long>{
 }

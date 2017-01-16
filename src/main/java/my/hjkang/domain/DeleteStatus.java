@@ -1,6 +1,8 @@
 package my.hjkang.domain;
 
-import javax.persistence.Column;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import javax.persistence.Entity;
 import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
@@ -9,7 +11,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 @Entity
-public class Answer {
+public class DeleteStatus {
+
 	@Id
 	@GeneratedValue // AI
 	private long id;
@@ -22,18 +25,17 @@ public class Answer {
 	@JoinColumn(foreignKey = @ForeignKey(name = "fk_user_to_answer"))
 	private User writer;
 
-	@Column(nullable = false)
-	private String contents;
+	private String deleteTime;
 
-	public Answer() {
+	public DeleteStatus() {
 	}
 
-	public Answer(long id, Question question, User writer, String contents) {
+	public DeleteStatus(long id, Question question, User writer, String deleteTime) {
 		super();
 		this.id = id;
 		this.question = question;
 		this.writer = writer;
-		this.contents = contents;
+		this.deleteTime = deleteTime;
 	}
 
 	public long getId() {
@@ -60,17 +62,26 @@ public class Answer {
 		this.writer = writer;
 	}
 
-	public String getContents() {
-		return contents;
+	public String getDeleteTime() {
+		return deleteTime;
 	}
 
-	public void setContents(String contents) {
-		this.contents = contents;
+	public String deleteTime() {
+		SimpleDateFormat sdf = new SimpleDateFormat("yy-MM-dd hh:mm");
+		Date date = new Date();
+		return sdf.format(date);
+	}
+
+	public void create(Question question, User user) {
+		this.question = question;
+		this.writer = user;
+		this.deleteTime = deleteTime();
 	}
 
 	@Override
 	public String toString() {
-		return "Answer [id=" + id + ", question=" + question + ", writer=" + writer + ", contents=" + contents + "]";
+		return "DeleteStatus [id=" + id + ", question=" + question + ", writer=" + writer + ", deleteTime=" + deleteTime
+				+ "]";
 	}
 
 }

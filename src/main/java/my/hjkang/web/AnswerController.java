@@ -11,20 +11,20 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import my.hjkang.domain.Answer;
-import my.hjkang.domain.AnswerRepository;
 import my.hjkang.domain.Question;
-import my.hjkang.domain.QuestionRepository;
 import my.hjkang.domain.User;
+import my.hjkang.service.AnswerService;
+import my.hjkang.service.QuestionService;
 
 @Controller
 @RequestMapping("/questions/{questionId}/answers")
 public class AnswerController {
 
 	@Autowired
-	AnswerRepository answerRepository;
+	AnswerService answerService;
 
 	@Autowired
-	QuestionRepository questionRepository;
+	QuestionService questionService;
 
 	@PostMapping("")
 	public String create(@PathVariable Long questionId, Model model, HttpSession session, Answer answer) {
@@ -32,11 +32,11 @@ public class AnswerController {
 		if (sessionUser == null) {
 			return "redirect:/users/login";
 		}
-		Question question = questionRepository.findOne(questionId);
+		Question question = questionService.findById(questionId);
 		answer.setWriter(sessionUser);
 		answer.setQuestion(question);
 		
-		answerRepository.save(answer);
+		answerService.create(answer);
 
 		return "redirect:/questions/{questionId}/view";
 	}
@@ -48,13 +48,13 @@ public class AnswerController {
 			return "redirect:/users/login";
 		}
 		
-		Answer answer = answerRepository.findOne(id);
+		Answer answer = answerService.findById(id);
 		
 		if(!sessionUser.matchId(answer.getWriter().getId())){
 			throw new IllegalStateException("자신의 댓글만 삭제할 수 있습니다.");
 		}
 		
-		answerRepository.delete(id);
+		answerService.delete(id);
 		
 		return "redirect:/questions/{questionId}/view";
 	}

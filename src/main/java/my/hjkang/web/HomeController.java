@@ -14,14 +14,14 @@ import my.hjkang.domain.User;
 public class HomeController {
 	
 	@Autowired
-	private QuestionRepository qnaRepository;
+	private QuestionRepository questionRepository;
 	
 	@GetMapping("/")
 	public String home(HttpSession session, Model model){
 		User sessionUser = (User) session.getAttribute("sessionUser");
 		
 		model.addAttribute("sessionedUser", sessionUser);
-		model.addAttribute("questions", qnaRepository.findAll());
+		model.addAttribute("questions", questionRepository.findAll());
 		return "index";
 	}
 }
