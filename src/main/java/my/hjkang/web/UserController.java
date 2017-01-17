@@ -2,6 +2,8 @@ package my.hjkang.web;
 
 import javax.servlet.http.HttpSession;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,6 +18,7 @@ import my.hjkang.service.UserService;
 @Controller
 @RequestMapping("/users")
 public class UserController {
+	private static final Logger log = LoggerFactory.getLogger(QuestionController.class);
 	
 	@Autowired
 	private UserService userService;
@@ -54,6 +57,9 @@ public class UserController {
 
 	@PostMapping("")
 	public String create(User user){
+		log.debug("user : {}", user);
+		/*log.debug("user : {}, name : {}", user, "name");*/
+		
 		userService.create(user);
 		return "redirect:/users";
 	}
