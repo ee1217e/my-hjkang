@@ -51,11 +51,10 @@ public class QuestionServiceTest {
 	@Test
 	public void 질문자답변자다르면삭제불가능() throws Exception {
 		User writer = new User(1L, "hjkang", "abc", "강현지", "hjkang@rockplace.co.kr");
-		User sessionUser = new User(2L, "qhrja", "abc", "박보검", "qhrja@rockplace.co.kr");
 
 		List<Answer> answerList = new ArrayList<Answer>();
 		answerList.add(new Answer(1L, writer, "댓글1"));
-		answerList.add(new Answer(2L, sessionUser, "댓글2"));
+		answerList.add(new Answer(2L, writer, "댓글2"));
 		
 		Question question = new Question(1L, writer, answerList, "제목", "내용");
 
