@@ -66,14 +66,13 @@ public class QuestionServiceTest {
 	public void 질문삭제상태변경() throws Exception {
 		User writer = new User(1L, "hjkang", "abc", "강현지", "hjkang@rockplace.co.kr");
 		Question question = new Question(1L, writer, null, "제목", "내용");
-		User sessionUser = new User(1L, "hjkang", "abc", "강현지", "hjkang@rockplace.co.kr");
 
-		question.delete(sessionUser);
+		question.delete(writer);
 		assertEquals(question.getDeleteStatus(), 1);
 	}
 
 	@Test
-	public void 질문삭제시로그추가() throws Exception {
+	public void 질문삭제시_삭제로그추가() throws Exception {
 		User writer = new User(1L, "hjkang", "abc", "강현지", "hjkang@rockplace.co.kr");
 		Question question = new Question(1L, writer, null, "제목", "내용");
 		

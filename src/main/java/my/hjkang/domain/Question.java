@@ -54,7 +54,9 @@ public class Question {
 	}
 
 	public boolean delete(User user) throws Exception {
-		loginUserWriterCheck(user);
+		if(!loginUserWriterCheck(user)){
+			throw new Exception("자신이 등록한 글만 삭제할 수 있습니다.");
+		}
 
 		if (answers == null) {
 			deleteStatusUpdate();
@@ -62,7 +64,9 @@ public class Question {
 		}
 
 		for (Answer answer : answers) {
-			qnaAndAnswerWriterCheck(answer);
+			if(!qnaAndAnswerWriterCheck(answer)){
+				throw new Exception("질문자와 답변자가 다른 경우 삭제할 수 없습니다.");
+			}
 		}
 
 		deleteStatusUpdate();
@@ -73,17 +77,13 @@ public class Question {
 	private void deleteStatusUpdate() {
 		this.deleteStatus = 1;
 	}
-
-	private void qnaAndAnswerWriterCheck(Answer answer) throws Exception {
-		if (answer.getWriter() != this.writer) {
-			throw new Exception("질문자와 답변자가 다른 경우 삭제할 수 없습니다.");
-		}
+	
+	private boolean qnaAndAnswerWriterCheck(Answer answer) throws Exception {
+		return answer.getWriter() == this.writer;
 	}
 
-	private void loginUserWriterCheck(User user) throws Exception {
-		if (this.writer.getId() != user.getId()) {
-			throw new Exception("자신이 등록한 글만 삭제할 수 있습니다.");
-		}
+	private boolean loginUserWriterCheck(User user) throws Exception {
+		return this.writer.getId() == user.getId();
 	}
 
 	public void setTitle(String title) {
