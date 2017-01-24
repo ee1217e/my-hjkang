@@ -24,7 +24,7 @@ public class QuestionServiceTest {
 	@Before
 	public void before(){
 		writer = new User(1L, "hjkang", "abc", "강현지", "hjkang@rockplace.co.kr");
-		question = new Question(1L, writer, null, "제목", "내용");
+		question = new Question("제목", "내용", writer, null);
 	}
 
 	@Test
@@ -45,7 +45,7 @@ public class QuestionServiceTest {
 		List<Answer> answerList = new ArrayList<Answer>();
 		answerList.add(new Answer(writer, "내용", question));
 		
-		question = new Question(1L, writer, answerList, "제목", "내용");
+		question = new Question("제목", "내용", writer, null);
 
 		question.delete(writer);
 	}
@@ -55,7 +55,7 @@ public class QuestionServiceTest {
 		List<Answer> answerList = new ArrayList<Answer>();
 		answerList.add(new Answer(writer, "내용", question));
 		
-		question = new Question(1L, writer, answerList, "제목", "내용");
+		question = new Question("제목", "내용", writer, null);
 
 		question.delete(writer);
 	}

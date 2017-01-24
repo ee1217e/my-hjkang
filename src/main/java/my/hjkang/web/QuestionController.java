@@ -42,7 +42,7 @@ public class QuestionController {
 		}
 		
 		User sessionUser = HttpSessionUtils.getUserFromSession(session);
-		Question question = new Question(title, contents, sessionUser);
+		Question question = new Question(title, contents, sessionUser, null);
 
 		questionService.save(question);
 

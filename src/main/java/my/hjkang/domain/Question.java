@@ -55,21 +55,13 @@ public class Question {
 	public Question() {
 	}
 	
-	public Question(String title, String contents, User writer){
+	public Question(String title, String contents, User writer, List<Answer> answers){
 		this.title = title;
 		this.contents = contents;
 		this.writer = writer;
 		SimpleDateFormat sdf = new SimpleDateFormat("yy-MM-dd hh:mm");
 		Date date = new Date();
 		this.regDate = sdf.format(date);
-	}
-
-	public Question(long id, User writer, List<Answer> answers, String title, String contents) {
-		this.id = id;
-		this.writer = writer;
-		this.answers = answers;
-		this.title = title;
-		this.contents = contents;
 	}
 	
 	private boolean isEmptyAnswers() {
