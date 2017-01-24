@@ -18,9 +18,6 @@ public class HomeController {
 	
 	@GetMapping("/")
 	public String home(HttpSession session, Model model){
-		User sessionUser = (User) session.getAttribute("sessionUser");
-		
-		model.addAttribute("sessionedUser", sessionUser);
 		model.addAttribute("questions", questionService.findByDeleteStatus());
 		return "index";
 	}

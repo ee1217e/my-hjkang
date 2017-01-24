@@ -79,4 +79,12 @@ public class QuestionServiceTest {
 		assertEquals(deleteStatus.getQuestion(), question);
 	}
 	
+	@Test
+	public void 질문수정() throws Exception {
+		User writer = new User(1L, "hjkang", "abc", "강현지", "hjkang@rockplace.co.kr");
+		Question question = new Question(1L, writer, null, "제목", "내용");
+		
+		question.update(writer, "제목수정", "내용수정");
+	}
+	
 }

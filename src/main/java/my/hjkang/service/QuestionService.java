@@ -28,7 +28,7 @@ public class QuestionService {
 		return questionRepository.findByDeleteStatus(0);
 	}
 	
-	public void create(Question question) {
+	public void save(Question question) {
 		questionRepository.save(question);
 	}
 
@@ -39,7 +39,7 @@ public class QuestionService {
 	public void delete(long id, User user) throws Exception {
 		Question question = findById(id);
 		question.delete(user);
-		create(question);
+		save(question);
 		
 		deleteStatusCreate(user, question);
 	}
@@ -53,5 +53,12 @@ public class QuestionService {
 	/*
 	 * public void delete(long id){ questionRepository.delete(id); }
 	 */
+	
+	public void update(long id, User sessionUser, String title, String contents) throws Exception {
+		Question question = findById(id);
+		question.update(sessionUser, title, contents);
+		
+		questionRepository.save(question);
+	}
 
 }

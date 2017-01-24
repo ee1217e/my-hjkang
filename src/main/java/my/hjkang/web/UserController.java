@@ -68,17 +68,16 @@ public class UserController {
 	public String list(Model model, HttpSession session){
 		model.addAttribute("users", userService.findAll());
 		
-		/*User user = (User) session.getAttribute("user");
-		model.addAttribute("sessionedUser", user);*/
 		return "user/list";
 	}
 	
 	@GetMapping("/{id}/updateForm")
 	public String updateForm(@PathVariable Long id, Model model, HttpSession session){
-		User sessionUser = (User) session.getAttribute("sessionUser");
-		if(sessionUser == null){
+		if(!HttpSessionUtils.isLoginUser(session)){
 			return "redirect:/users/login";
 		}
+		
+		User sessionUser = HttpSessionUtils.getUserFromSession(session);
 		if(!sessionUser.matchId(id)){
 			throw new IllegalStateException("자신의 정보만 수정할 수 있습니다.");
 		}
@@ -91,10 +90,11 @@ public class UserController {
 	
 	@PostMapping("/{id}/update")
 	public String update(@PathVariable Long id, User updateUser, HttpSession session){
-		User sessionUser = (User) session.getAttribute("sessionUser");
-		if(sessionUser == null){
+		if(!HttpSessionUtils.isLoginUser(session)){
 			return "redirect:/users/login";
 		}
+		
+		User sessionUser = HttpSessionUtils.getUserFromSession(session);
 		if(!sessionUser.matchId(id)){
 			throw new IllegalStateException("자신의 정보만 수정할 수 있습니다.");
 		}

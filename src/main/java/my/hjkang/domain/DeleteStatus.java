@@ -18,7 +18,7 @@ public class DeleteStatus {
 	private long id;
 
 	@ManyToOne
-	@JoinColumn(foreignKey = @ForeignKey(name = "fk_question_to_answer"))
+	@JoinColumn(foreignKey = @ForeignKey(name = "fk_question_to_answer2"))
 	private Question question;
 
 	@ManyToOne

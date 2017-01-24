@@ -5,20 +5,26 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 @Entity
 public class User {
 	@Id
 	@GeneratedValue // AI
+	@JsonProperty
 	private long id;
 
 	// F3 눌러서 Column 확인하자
 	@Column(length = 20, nullable = false, unique = true)
+	@JsonProperty
 	private String userId;
 
 	@Column(nullable = false)
+	@JsonProperty
 	private String password;
 
 	@Column(nullable = false)
+	@JsonProperty
 	private String name;
 
 	private String email;
