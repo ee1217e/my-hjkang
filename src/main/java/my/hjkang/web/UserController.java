@@ -34,13 +34,13 @@ public class UserController {
 	}
 	
 	@PostMapping("/loginOk")
-	public String login(String userId, User sessionUser, HttpSession session){
+	public String login(String userId, String password, HttpSession session){
 		User user = userService.findByUserId(userId);
 		
 		if(user == null){
 			return "redirect:/users/login";
 		}
-		if(!user.matchPassword(sessionUser)){
+		if(!user.matchPassword(password)){
 			return "redirect:/users/login";
 		}
 		

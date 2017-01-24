@@ -50,13 +50,6 @@ public class Answer {
 		Date date = new Date();
 		this.regDate = sdf.format(date);
 	}
-
-	public Answer(long id, User writer, String contents) {
-		super();
-		this.id = id;
-		this.writer = writer;
-		this.contents = contents;
-	}
 	
 	public User getWriter() {
 		return writer;

@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import my.hjkang.domain.Answer;
@@ -16,6 +17,7 @@ import my.hjkang.service.AnswerService;
 import my.hjkang.service.QuestionService;
 
 @RestController
+@RequestMapping("/api/questions/{questionId}/answers")
 public class ApiAnswerController {
 
 	@Autowired
@@ -24,7 +26,7 @@ public class ApiAnswerController {
 	@Autowired
 	private AnswerService answerService;
 
-	@PostMapping("/api/questions/{questionId}/answers")
+	@PostMapping("")
 	public Answer addAnswer(@PathVariable long questionId, String contents, HttpSession session) {
 		if (!HttpSessionUtils.isLoginUser(session)) {
 			return null;
@@ -34,10 +36,10 @@ public class ApiAnswerController {
 		Question question = questionService.findById(questionId);
 		Answer answer = new Answer(sessionUser, contents, question);
 
-		return answerService.create(answer);
+		return answerService.save(answer);
 	}
 	
-	@DeleteMapping("/api/questions/{questionId}/answers/{id}")
+	@DeleteMapping("/{id}")
 	public Result deleteAnswer(@PathVariable long questionId, @PathVariable long id, HttpSession session){
 		if (!HttpSessionUtils.isLoginUser(session)) {
 			return Result.fail("로그인이 필요합니다.");
@@ -54,4 +56,5 @@ public class ApiAnswerController {
 		
 		return Result.ok();
 	}
+	
 }

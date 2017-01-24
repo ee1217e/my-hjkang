@@ -53,7 +53,6 @@ public class Question {
 	private int deleteStatus;
 
 	public Question() {
-
 	}
 	
 	public Question(String title, String contents, User writer){
@@ -66,36 +65,13 @@ public class Question {
 	}
 
 	public Question(long id, User writer, List<Answer> answers, String title, String contents) {
-		super();
 		this.id = id;
 		this.writer = writer;
 		this.answers = answers;
 		this.title = title;
 		this.contents = contents;
 	}
-
-	public void setTitle(String title) {
-		this.title = title;
-	}
-
-	public void setContents(String contents) {
-		this.contents = contents;
-	}
-
-	public void setRegDate() {
-		SimpleDateFormat sdf = new SimpleDateFormat("yy-MM-dd hh:mm");
-		Date date = new Date();
-		this.regDate = sdf.format(date);
-	}
-
-	public void setWriter(User writer) {
-		this.writer = writer;
-	}
-
-	public int getDeleteStatus() {
-		return deleteStatus;
-	}
-
+	
 	private boolean isEmptyAnswers() {
 		return answers == null;
 	}

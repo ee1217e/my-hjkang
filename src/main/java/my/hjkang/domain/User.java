@@ -32,40 +32,15 @@ public class User {
 	public User(){}
 
 	public User(long id, String userId, String password, String name, String email) {
-		super();
 		this.id = id;
 		this.userId = userId;
 		this.password = password;
 		this.name = name;
 		this.email = email;
 	}
-
+	
 	public long getId() {
 		return id;
-	}
-
-	public String getUserId() {
-		return userId;
-	}
-
-	public void setUserId(String userId) {
-		this.userId = userId;
-	}
-
-	public String getPassword() {
-		return password;
-	}
-
-	public void setPassword(String password) {
-		this.password = password;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
 	}
 
 	public boolean matchId(Long newId) {
@@ -75,12 +50,12 @@ public class User {
 		return newId.equals(id);
 	}
 
-	public boolean matchPassword(User updateUser) {
-		return this.password.equals(updateUser.getPassword());
+	public boolean matchPassword(String password) {
+		return this.password.equals(password);
 	}
 
 	public void update(User updateUser) {
-		if (!matchPassword(updateUser)) {
+		if (!matchPassword(updateUser.password)) {
 			throw new IllegalStateException("비밀번호가 다릅니다.");
 		}
 		this.name = updateUser.name;

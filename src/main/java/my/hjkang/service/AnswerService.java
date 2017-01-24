@@ -13,7 +13,7 @@ public class AnswerService {
 	@Autowired
 	AnswerRepository answerRepository;
 
-	public Answer create(Answer answer){
+	public Answer save(Answer answer){
 		return answerRepository.save(answer);
 	}
 	

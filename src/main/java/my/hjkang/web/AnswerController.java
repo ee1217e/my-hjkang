@@ -36,7 +36,7 @@ public class AnswerController {
 		Question question = questionService.findById(questionId);
 		
 		Answer answer = new Answer(sessionUser, contents, question);
-		answerService.create(answer);
+		answerService.save(answer);
 
 		return "redirect:/questions/{questionId}/view";
 	}
