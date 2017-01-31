@@ -38,10 +38,6 @@ public class DeleteStatus {
 		this.regDate = regDate;
 	}
 
-	public Question getQuestion() {
-		return question;
-	}
-	
 	public void setRegDate() {
 		SimpleDateFormat sdf = new SimpleDateFormat("yy-MM-dd hh:mm");
 		Date date = new Date();

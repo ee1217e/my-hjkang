@@ -23,9 +23,9 @@ public class QuestionService {
 	public Iterable<Question> findAll() {
 		return questionRepository.findAll();
 	}
-
+	
 	public List<Question> findByDeleteStatus() {
-		return questionRepository.findByDeleteStatus(0);
+		return questionRepository.findByDeleteStatusOrderByIdDesc(0);
 	}
 	
 	public void save(Question question) {
