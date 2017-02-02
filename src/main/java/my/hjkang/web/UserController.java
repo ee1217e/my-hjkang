@@ -18,6 +18,7 @@ import my.hjkang.service.UserService;
 @Controller
 @RequestMapping("/users")
 public class UserController {
+	private static final Logger log = LoggerFactory.getLogger(QuestionController.class);
 	
 	@Autowired
 	private UserService userService;
@@ -55,9 +56,9 @@ public class UserController {
 	}
 
 	@PostMapping("")
-	public String create(User user, String name){
-		System.out.println("★★★★★★★★★★"+user.toString());
-		System.out.println(name);
+	public String create(User user){
+		log.debug("user : {}", user);
+		/*log.debug("user : {}, name : {}", user, "name");*/
 		
 		userService.create(user);
 		return "redirect:/users";

@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import my.hjkang.domain.Question;
 import my.hjkang.domain.User;
+import my.hjkang.service.AnswerService;
 import my.hjkang.service.QuestionService;
 
 @Controller
@@ -24,6 +25,9 @@ public class QuestionController {
 	@Autowired
 	private QuestionService questionService;
 
+	@Autowired
+	private AnswerService answerService; 
+	
 	@GetMapping("/form")
 	public String form(HttpSession session, Model model) {
 		if (!HttpSessionUtils.isLoginUser(session)) {
@@ -51,6 +55,7 @@ public class QuestionController {
 
 	@GetMapping("/{id}/view")
 	public String view(@PathVariable Long id, Model model) {
+		model.addAttribute("answerCount", answerService.countByQuestionId(id));
 		model.addAttribute("questions", questionService.findById(id));
 		return "qna/show";
 	}

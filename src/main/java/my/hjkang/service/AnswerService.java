@@ -27,6 +27,9 @@ public class AnswerService {
 		if(answer.loginUserAnswerWriterCheck(sessionUser)){
 			answerRepository.delete(id);
 		}
-		
+	}
+	
+	public long countByQuestionId(long questionId){
+		return answerRepository.countByQuestionId(questionId);
 	}
 }
